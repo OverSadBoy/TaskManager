@@ -1,4 +1,6 @@
-package net.lab;
+package net.lab.model;
+
+import net.lab.controller.TaskJournal;
 
 import java.io.*;
 
@@ -9,7 +11,7 @@ public class JournalManagement {
     }
 
     public static TaskJournal deserializeTasks(FileInputStream fStream) throws IOException, ClassNotFoundException {
-        TaskJournal result = new TaskJournal();
+        TaskJournal result;
         ObjectInputStream ois = new ObjectInputStream(fStream);
         result = (TaskJournal) ois.readObject();
         return result;

@@ -1,3 +1,3 @@
-package net.lab;
+package net.lab.controller;
 public class NotificationSystem {
 }

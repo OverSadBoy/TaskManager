@@ -1,4 +1,6 @@
-package net.lab;
+package net.lab.controller;
+import net.lab.model.Task;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package net.lab;
+package net.lab.view;
 
 import javax.swing.*;
 import java.awt.*;

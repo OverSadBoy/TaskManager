@@ -1,4 +1,4 @@
-package net.lab;
+package net.lab.model;
 
 import java.io.Serializable;
 import java.util.Date;
