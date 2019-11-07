@@ -1,6 +1,7 @@
 package net.lab;
 
 import net.lab.view.MainForm;
+import net.lab.view.UserInterface;
 
 public class Main {
 
