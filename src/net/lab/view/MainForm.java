@@ -11,10 +11,6 @@ public class MainForm extends JFrame {
 
     public MainForm(String title) throws HeadlessException {
         super(title);
-        setSize(800, 600);
-        setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(panel1);
-        setVisible(true);
     }
 }

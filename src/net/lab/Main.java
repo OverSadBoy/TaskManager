@@ -5,6 +5,6 @@ import net.lab.view.MainForm;
 public class Main {
 
     public static void main(String[] args) {
-         MainForm form = new MainForm("Task Manager");
+        UserInterface.createForm(new MainForm("Task Manager"), 640, 480);
     }
 }
