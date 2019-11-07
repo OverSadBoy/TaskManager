@@ -1,3 +1,4 @@
+package net.lab;
 import java.io.Serializable;
 import java.util.ArrayList;
 
