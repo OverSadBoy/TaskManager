@@ -3,19 +3,25 @@ package net.lab.view;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Event extends JDialog {
+public class Event extends JFrame {
     private JPanel contentPane;
     private JButton buttonEndTask;
-    private JButton buttonCancel;
+    private JPanel panelBtn;
+    private JPanel panelText;
+    private JButton deferBtn;
 
     public Event() {
-        setContentPane(contentPane);
-        setModal(true);
+        super("Event");
+        setSize(200, 200);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        add(contentPane);
+        setVisible(true);
         getRootPane().setDefaultButton(buttonEndTask);
 
         buttonEndTask.addActionListener(e -> onOK());
 
-        buttonCancel.addActionListener(e -> onCancel());
+        deferBtn.addActionListener(e -> onCancel());
 
         // call onCancel() when cross is clicked
         setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
@@ -39,12 +45,5 @@ public class Event extends JDialog {
     private void onCancel() {
         // add your code here if necessary
         dispose();
-    }
-
-    public static void main(String[] args) {
-        Event dialog = new Event();
-        dialog.pack();
-        dialog.setVisible(true);
-        System.exit(0);
     }
 }

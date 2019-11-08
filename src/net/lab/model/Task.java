@@ -6,10 +6,10 @@ import java.util.Date;
 public class Task implements Serializable {
     private String name;
     private String description;
-    private Date notificationDate;
+    private String notificationDate;
     private String contacts;
 
-    public Task(String name, String description, Date notificationDate, String contacts) {
+    public Task(String name, String description, String notificationDate, String contacts) {
         this.name = name;
         this.description = description;
         this.notificationDate = notificationDate;
@@ -32,11 +32,11 @@ public class Task implements Serializable {
         this.description = description;
     }
 
-    public Date getNotificationDate() {
+    public String getNotificationDate() {
         return notificationDate;
     }
 
-    public void setNotificationDate(Date notificationDate) {
+    public void setNotificationDate(String notificationDate) {
         this.notificationDate = notificationDate;
     }
 

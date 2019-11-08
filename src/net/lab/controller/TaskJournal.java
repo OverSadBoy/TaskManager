@@ -1,7 +1,9 @@
 package net.lab.controller;
+
 import net.lab.model.JournalManagement;
 import net.lab.model.Task;
 
+import javax.swing.*;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -9,10 +11,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class TaskJournal implements Serializable {
+    private JournalManagement journalManagement;
+    private JFrame view;
     private ArrayList<Task> tasks = new ArrayList<Task>();
     private final String fileName = "data.bin";
-    public TaskJournal(ArrayList<Task> tasks) {
+
+    public TaskJournal(ArrayList<Task> tasks, JFrame view) {
         this.tasks = tasks;
+        this.view = view;
     }
 
     public TaskJournal() {
