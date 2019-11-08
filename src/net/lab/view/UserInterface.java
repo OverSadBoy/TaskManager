@@ -36,7 +36,7 @@ public class UserInterface extends JFrame {
 
     private void initComponents(ArrayList arrayList) {
         addTaskButton.addActionListener(e -> {
-            AddTaskUI addTaskUI =new AddTaskUI();
+            AddTaskUI addTaskUI =new AddTaskUI(taskJournal);
         });
 
         deleteTaskButton.addActionListener(e -> {
