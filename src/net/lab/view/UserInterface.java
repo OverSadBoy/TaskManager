@@ -49,12 +49,7 @@ public class UserInterface extends JFrame {
     }
 
     public void fillTable(ArrayList list){
-        Vector data = new Vector();
-        Vector name = new Vector();
-        for (int i = 0; i < str.length; i++) {
-            name.add(i,str[i]);
-        }
-        TableModel tm = new TableModel(data,name);
+
     }
 
     class TableModel extends DefaultTableModel{
