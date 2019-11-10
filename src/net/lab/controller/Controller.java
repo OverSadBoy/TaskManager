@@ -1,0 +1,58 @@
+package net.lab.controller;
+
+import net.lab.model.Model;
+import net.lab.model.ModelContract;
+import net.lab.model.Task;
+import net.lab.view.ViewContract;
+
+import javax.swing.*;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Vector;
+
+public class Controller implements Serializable, ControllerContract {
+
+    private ModelContract model;
+    private ViewContract view;
+    private Vector<Task> tasks;
+    private static final String fileName = "data.bin";
+
+    public Controller(ModelContract model, ViewContract view) {
+        this.model = model;
+        this.view = view;
+        tasks = model.getTasks();
+        view.updateView(tasks);
+    }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+        model.addTask(task);
+        view.updateView(tasks);
+    }
+
+    public void deleteTask(Task task) {
+        tasks.remove(task.getId());
+        model.deleteTask(task);
+        view.updateView(tasks);
+    }
+
+    public void loadJournal(Vector<Task> tasks) {
+        try (FileInputStream fis = new FileInputStream(fileName)) {
+            tasks = Model.deserializeTasks(fis).tasks;
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        view.updateView(tasks);
+    }
+
+    public void saveJournal(Vector<Task> tasks) {
+        try (FileOutputStream fos = new FileOutputStream(fileName)) {
+            Model.serializeTasks(this, fos);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}

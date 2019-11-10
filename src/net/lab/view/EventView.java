@@ -3,18 +3,17 @@ package net.lab.view;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class Event extends JFrame {
+public class EventView extends JFrame {
     private JPanel contentPane;
     private JButton buttonEndTask;
     private JPanel panelBtn;
     private JPanel panelText;
     private JButton deferBtn;
 
-    public Event() {
+    public EventView() {
         super("Event");
         setSize(200, 200);
         setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(contentPane);
         setVisible(true);
         getRootPane().setDefaultButton(buttonEndTask);

@@ -1,13 +1,14 @@
 package net.lab;
 
-import net.lab.controller.TaskJournal;
-import net.lab.view.UserInterface;
-
-import java.util.ArrayList;
+import net.lab.controller.Controller;
+import net.lab.model.Model;
+import net.lab.view.MainView;
 
 public class Main {
 
     public static void main(String[] args) {
-         UserInterface form = new UserInterface(new ArrayList(),new TaskJournal());
+        Model model = new Model();
+        MainView view = new MainView(model);
+        Controller controller = new Controller(model,view);
     }
 }

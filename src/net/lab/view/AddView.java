@@ -1,12 +1,12 @@
 package net.lab.view;
 
-import net.lab.controller.TaskJournal;
+import net.lab.controller.Controller;
+import net.lab.controller.ControllerContract;
 import net.lab.model.Task;
 
 import javax.swing.*;
-import javax.xml.crypto.Data;
 
-public class AddTaskUI extends JFrame {
+public class AddView extends JFrame {
     private JTextField nameTask;
     private JTextField description;
     private JTextField date;
@@ -15,20 +15,20 @@ public class AddTaskUI extends JFrame {
     private JButton addButton;
     private JButton cancelButton;
 
-    private TaskJournal controller;
+    private ControllerContract controller;
 
-    public AddTaskUI(TaskJournal ctrl) {
+    public AddView() {
         super("Add task");
         setBounds(500, 350, 500, 350);
+        setResizable(false);
         add(addPanel);
         setListener();
         setVisible(true);
-        this.controller = ctrl;
     }
 
     private void setListener() {
         addButton.addActionListener(e -> {
-            controller.addTask(createNewTask(nameTask.getText(), description.getText(), date.getText(), contacts.getText()));
+            dispose();
         });
 
         cancelButton.addActionListener(e -> dispose());

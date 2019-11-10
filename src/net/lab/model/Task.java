@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class Task implements Serializable {
+    private int id;
     private String name;
     private String description;
     private String notificationDate;
@@ -14,6 +15,14 @@ public class Task implements Serializable {
         this.description = description;
         this.notificationDate = notificationDate;
         this.contacts = contacts;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
