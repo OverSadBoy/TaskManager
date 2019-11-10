@@ -24,7 +24,6 @@ public class Controller implements Serializable, ControllerContract {
         this.model = model;
         this.view = view;
         tasks = model.getTasks();
-        view.updateView(tasks);
     }
 
     public void addTask(Task task) {

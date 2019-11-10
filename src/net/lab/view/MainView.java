@@ -43,7 +43,6 @@ public class MainView extends JFrame implements ViewContract {
     }
 
 
-
     @Override
     public Task getAddTask() {
         return null;
@@ -57,9 +56,10 @@ public class MainView extends JFrame implements ViewContract {
         namCol.add("Notification date");
         namCol.add("Contacts");
     }
+
     private Vector<Vector<String>> toNormalVector(Vector<Task> tasks) {
         Vector<Vector<String>> data = new Vector<>();
-        for (int i = 0; tasks.get(i) != null; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             Vector<String> task = new Vector<>();
             task.add(tasks.get(i).getName());
             task.add(tasks.get(i).getDescription());
