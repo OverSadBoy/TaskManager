@@ -38,6 +38,12 @@ public class Controller implements Serializable, ControllerContract {
         view.updateView(tasks);
     }
 
+    @Override
+    public void editTask(Task beforeTask, Task afterTask) {
+
+    }
+
+    //TODO ДОБАВИТЬ ЗАГРУЗКУ В ВЕКТОР
     public void loadJournal(Vector<Task> tasks) {
         try (FileInputStream fis = new FileInputStream(fileName)) {
             tasks = Model.deserializeTasks(fis).tasks;
@@ -47,11 +53,5 @@ public class Controller implements Serializable, ControllerContract {
         view.updateView(tasks);
     }
 
-    public void saveJournal(Vector<Task> tasks) {
-        try (FileOutputStream fos = new FileOutputStream(fileName)) {
-            Model.serializeTasks(this, fos);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }

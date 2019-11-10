@@ -34,8 +34,8 @@ public class AddView extends JFrame {
         cancelButton.addActionListener(e -> dispose());
     }
 
-    private Task createNewTask(String name, String description, String data, String contact) {
-        return new Task(name, description, data, contact);
+    private Task createNewTask(int id,String name, String description, String data, String contact) {
+        return new Task(id,name, description, data, contact);
     }
 
 }

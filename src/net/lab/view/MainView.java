@@ -28,7 +28,7 @@ public class MainView extends JFrame implements ViewContract {
         add(jPanel1);
         initComponents();
         this.model = model;
-        updateView(model.getTasks());
+      //  updateView(model.getTasks());
         setVisible(true);
     }
 

@@ -8,6 +8,6 @@ public interface ControllerContract {
 
     void addTask(Task task);
     void deleteTask(Task task);
+    void editTask(Task beforeTask,Task afterTask);
     void loadJournal(Vector<Task> tasks);
-    void saveJournal(Vector<Task> tasks);
 }
