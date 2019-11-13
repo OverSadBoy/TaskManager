@@ -16,26 +16,33 @@ public class AddView extends JFrame {
     private JButton cancelButton;
 
     private ControllerContract controller;
+    private ViewContract view;
 
-    public AddView() {
+    AddView(ViewContract view) {
         super("Add task");
         setBounds(500, 350, 500, 350);
         setResizable(false);
         add(addPanel);
         setListener();
+        this.view = view;
         setVisible(true);
     }
 
     private void setListener() {
         addButton.addActionListener(e -> {
+            view.addNewTask(getTask());
             dispose();
         });
 
         cancelButton.addActionListener(e -> dispose());
     }
 
-    private Task createNewTask(int id,String name, String description, String data, String contact) {
-        return new Task(id,name, description, data, contact);
+    private Task getTask() {
+        return new Task(nameTask.getText(), description.getText(), date.getText(), contacts.getText());
+    }
+
+    private Task createNewTask(int id, String name, String description, String data, String contact) {
+        return new Task(name, description, data, contact);
     }
 
 }

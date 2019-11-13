@@ -28,13 +28,15 @@ public class MainView extends JFrame implements ViewContract {
         add(jPanel1);
         initComponents();
         this.model = model;
-      //  updateView(model.getTasks());
+        Vector<Task> gg = new Vector<>();
+        gg.add(new Task("fdnfh","dfgh","gfdh","gdfjd"));
+        updateView(gg);
         setVisible(true);
     }
 
     private void initComponents() {
         addTaskButton.addActionListener(e -> {
-            AddView addTaskUI = new AddView();
+            new AddView(this);
         });
 
         deleteTaskButton.addActionListener(e -> {
@@ -42,11 +44,23 @@ public class MainView extends JFrame implements ViewContract {
         });
     }
 
+    @Override
+    public void updateView(Vector<Task> tasks) {
+        tableNameCol();
+        table.setModel(new TableModel(toNormalVector(tasks), namCol));
+    }
+
+    @Override
+    public void addNewTask(Task task) {
+        model.addTask(task);
+       // updateView(model.getTasks());
+    }
 
     @Override
     public Task getAddTask() {
         return null;
     }
+
 
     private static Vector<String> namCol = new Vector<>(4);
 
@@ -59,26 +73,20 @@ public class MainView extends JFrame implements ViewContract {
 
     private Vector<Vector<String>> toNormalVector(Vector<Task> tasks) {
         Vector<Vector<String>> data = new Vector<>();
-        for (int i = 0; i < tasks.size(); i++) {
+        for (Task value : tasks) {
             Vector<String> task = new Vector<>();
-            task.add(tasks.get(i).getName());
-            task.add(tasks.get(i).getDescription());
-            task.add(tasks.get(i).getNotificationDate());
-            task.add(tasks.get(i).getContacts());
+            task.add(value.getName());
+            task.add(value.getDescription());
+            task.add(value.getNotificationDate());
+            task.add(value.getContacts());
             data.add(task);
         }
         return data;
     }
 
-    @Override
-    public void updateView(Vector<Task> tasks) {
-        tableNameCol();
-        table.setModel(new TableModel(toNormalVector(tasks), namCol));
-    }
-
 
     static class TableModel extends DefaultTableModel {
-        public TableModel(Vector<Vector<String>> data, Vector namCol) {
+        TableModel(Vector<Vector<String>> data, Vector namCol) {
             super(data, namCol);
         }
     }

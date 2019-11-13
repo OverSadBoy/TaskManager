@@ -23,7 +23,7 @@ public class Controller implements Serializable, ControllerContract {
     public Controller(ModelContract model, ViewContract view) {
         this.model = model;
         this.view = view;
-        tasks = model.getTasks();
+     //   tasks = model.getTasks();
     }
 
     public void addTask(Task task) {
@@ -45,12 +45,7 @@ public class Controller implements Serializable, ControllerContract {
 
     //TODO ДОБАВИТЬ ЗАГРУЗКУ В ВЕКТОР
     public void loadJournal(Vector<Task> tasks) {
-        try (FileInputStream fis = new FileInputStream(fileName)) {
-            tasks = Model.deserializeTasks(fis).tasks;
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        view.updateView(tasks);
+
     }
 
 

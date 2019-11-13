@@ -10,7 +10,7 @@ public class Task implements Serializable {
     private String notificationDate;
     private String contacts;
 
-    public Task(int id,String name, String description, String notificationDate, String contacts) {
+    public Task(String name, String description, String notificationDate, String contacts) {
         this.name = name;
         this.description = description;
         this.notificationDate = notificationDate;
