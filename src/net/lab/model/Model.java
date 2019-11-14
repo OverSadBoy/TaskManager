@@ -14,13 +14,12 @@ public class Model implements ModelContract {
 
     private static Vector<Task> listTask;
 
-    public Model() {
+    public Model() throws IOException {
         file = new File(fileName);
-        try {
+        if(!file.isFile()) {
             file.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
+
         try {
             fileInputStream = new FileInputStream(file);
             fileOutputStream = new FileOutputStream(file);
@@ -29,28 +28,29 @@ public class Model implements ModelContract {
         }
     }
 
-    //TODO ЗАПИСЫВАТЬ ИЗ ВЕКТОРА, А НЕ КОНТРОЛЛЕР
-    public static void serializeTasks(Vector<Task> object, FileOutputStream fStream) throws IOException {
-        ObjectOutputStream oos = new ObjectOutputStream(fStream);
-        oos.writeObject(object);
-    }
-
-    //TODO ЗАПИСЫВАТЬ В ВЕКТОР, А НЕ КОНТРООЛЛЕР
-    public static Vector<Task> deserializeTasks() throws IOException, ClassNotFoundException {
-        ObjectInputStream ois = new ObjectInputStream(fileInputStream);
-        Vector<Task> res = (Vector<Task>) ois.readObject();
-        return res;
-    }
-
-    //TODO продумать логику методов
     @Override
-    public void addTask(Task task) {
+    public void addTask(Vector<Task> tasks) {
         try {
             ObjectOutputStream oos = new ObjectOutputStream(fileOutputStream);
-            oos.writeObject(task);
+            new FileWriter(file).write("");
+            oos.writeObject(tasks);
+            oos.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public Vector<Task> getTasks() {
+        Vector<Task> tasks = new Vector<>();
+        try {
+            ObjectInputStream ois = new ObjectInputStream(fileInputStream);
+            tasks = (Vector<Task>) ois.readObject();
+            ois.close();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return tasks;
     }
 
     @Override
@@ -61,21 +61,5 @@ public class Model implements ModelContract {
     @Override
     public void deleteTask(Task task) {
 
-    }
-
-    @Override
-    public Vector<Task> getTasks() {
-        Vector<Task> tasks = new Vector<>();
-        try {
-            ObjectInputStream ois = new ObjectInputStream(fileInputStream);
-            try {
-                tasks = (Vector<Task>) ois.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return tasks;
     }
 }

@@ -6,8 +6,8 @@ import java.util.Vector;
 
 public interface ControllerContract {
 
-    void addTask(Task task);
+    void addTask(Vector<Task> tasks);
     void deleteTask(Task task);
     void editTask(Task beforeTask,Task afterTask);
-    void loadJournal(Vector<Task> tasks);
+    void loadJournal();
 }

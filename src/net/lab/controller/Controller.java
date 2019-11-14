@@ -17,25 +17,22 @@ public class Controller implements Serializable, ControllerContract {
 
     private ModelContract model;
     private ViewContract view;
-    private Vector<Task> tasks;
     private static final String fileName = "data.bin";
 
     public Controller(ModelContract model, ViewContract view) {
         this.model = model;
         this.view = view;
-     //   tasks = model.getTasks();
+        loadJournal();
     }
 
-    public void addTask(Task task) {
-        tasks.add(task);
-        model.addTask(task);
-        view.updateView(tasks);
+    public void addTask(Vector<Task> tasks) {
+        model.addTask(tasks);
+        view.updateView(model.getTasks());
     }
 
     public void deleteTask(Task task) {
-        tasks.remove(task.getId());
         model.deleteTask(task);
-        view.updateView(tasks);
+        view.updateView(model.getTasks());
     }
 
     @Override
@@ -43,9 +40,8 @@ public class Controller implements Serializable, ControllerContract {
 
     }
 
-    //TODO ДОБАВИТЬ ЗАГРУЗКУ В ВЕКТОР
-    public void loadJournal(Vector<Task> tasks) {
-
+    public void loadJournal() {
+        view.updateView(model.getTasks());
     }
 
 

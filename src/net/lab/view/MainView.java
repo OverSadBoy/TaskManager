@@ -5,6 +5,7 @@ import net.lab.model.Task;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.Vector;
 
@@ -18,42 +19,51 @@ public class MainView extends JFrame implements ViewContract {
     private JTable table;
 
     private ModelContract model;
+    private Vector<Task> tasks;
 
 
     public MainView(ModelContract model) throws HeadlessException {
         super("Task Manager");
-        setBounds(400, 150, 800, 600);
-        setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        add(jPanel1);
-        initComponents();
+        inflateView();
+        setListener();
+        tasks = model.getTasks();
         this.model = model;
         Vector<Task> gg = new Vector<>();
-        gg.add(new Task("fdnfh","dfgh","gfdh","gdfjd"));
+        gg.add(new Task("похавать","макарошки с пюрешкой","15:20","с Лехой"));
+        tableNameCol();
         updateView(gg);
         setVisible(true);
     }
 
-    private void initComponents() {
-        addTaskButton.addActionListener(e -> {
-            new AddView(this);
-        });
+    private void setListener() {
+        addTaskButton.addActionListener(e -> new AddView(this));
 
         deleteTaskButton.addActionListener(e -> {
 
         });
     }
 
+    private void inflateView(){
+        setBounds(400, 150, 800, 600);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        add(jPanel1);
+    }
+
+    public Vector<Task> getTasks() {
+        return tasks;
+    }
+
     @Override
     public void updateView(Vector<Task> tasks) {
-        tableNameCol();
         table.setModel(new TableModel(toNormalVector(tasks), namCol));
     }
 
     @Override
     public void addNewTask(Task task) {
-        model.addTask(task);
-       // updateView(model.getTasks());
+        tasks.add(task);
+        model.addTask(tasks);
+        updateView(tasks);
     }
 
     @Override
