@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class Main {
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Model model = new Model();
         MainView view = new MainView(model);
         Controller controller = new Controller(model,view);
