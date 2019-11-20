@@ -5,37 +5,28 @@ import net.lab.model.Task;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.Vector;
 
 public class MainView extends JFrame implements ViewContract {
 
-
     private JPanel jPanel1;
     private JButton addTaskButton;
     private JButton deleteTaskButton;
-    private JScrollPane ScrollPane;
     private JTable table;
     private ModelContract model;
     private Vector<Task> tasks;
-
 
     public MainView(ModelContract model) throws HeadlessException {
         super("Task Manager");
         inflateView();
         setListener();
-        tasks = model.getTasks();
-        this.model = model;
-        tableNameCol();
+        tasks = new Vector<>();
+        tasks.add(new Task("gfhgfh","fghfghfg","fghgfh","fghfgh"));
         updateView(tasks);
-        setVisible(true);
-    }
-
-    private void setListener() {
-        addTaskButton.addActionListener(e -> new AddView(this));
-
-        deleteTaskButton.addActionListener(e -> deleteTask(table.getSelectedRow()));
+       // tasks = model.getTasks();
+        this.model = model;
+        startEventView(new Task("fsg","dfgs","fsdg","sg"));
     }
 
     private void inflateView() {
@@ -43,10 +34,13 @@ public class MainView extends JFrame implements ViewContract {
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(jPanel1);
+        tableNameCol();
+        setVisible(true);
     }
 
-    public Vector<Task> getTasks() {
-        return tasks;
+    private void setListener() {
+        addTaskButton.addActionListener(e -> new AddView(this));
+        deleteTaskButton.addActionListener(e -> deleteTask(tasks.get(table.getSelectedRow())));
     }
 
     @Override
@@ -61,9 +55,19 @@ public class MainView extends JFrame implements ViewContract {
     }
 
     @Override
-    public void deleteTask(int pos) {
-        tasks.remove(pos);
+    public void changeTask(Task taskOld, Task taskAct) {
+        tasks.remove(taskOld);
+        tasks.add(taskAct);
+    }
+
+    @Override
+    public void deleteTask(Task task) {
+        tasks.remove(task);
         updateView(tasks);
+    }
+
+    public void startEventView(Task task) {
+        new EventView(this, task);
     }
 
     private static Vector<String> namCol = new Vector<>(4);
@@ -88,7 +92,6 @@ public class MainView extends JFrame implements ViewContract {
         return data;
     }
 
-
     static class TableModel extends DefaultTableModel {
         TableModel(Vector<Vector<String>> data, Vector namCol) {
             super(data, namCol);
@@ -99,5 +102,4 @@ public class MainView extends JFrame implements ViewContract {
             return false;
         }
     }
-
 }

@@ -1,48 +1,49 @@
 package net.lab.view;
 
+import net.lab.model.Task;
+
 import javax.swing.*;
-import java.awt.event.*;
 
 public class EventView extends JFrame {
     private JPanel contentPane;
     private JButton buttonEndTask;
     private JPanel panelBtn;
-    private JPanel panelText;
     private JButton deferBtn;
+    private JLabel eventMes;
 
-    public EventView() {
+    private ViewContract view;
+    private Task task;
+
+    EventView(ViewContract view, Task task) {
         super("Event");
-        setSize(200, 200);
+        this.view = view;
+        this.task = task;
+        inflate();
+        setListener();
+    }
+
+    private void inflate() {
+        setBounds(500, 200, 350, 200);
         setResizable(false);
         add(contentPane);
+        eventMes.setText(setEventText());
         setVisible(true);
-        getRootPane().setDefaultButton(buttonEndTask);
+    }
 
-        buttonEndTask.addActionListener(e -> onOK());
+    private String setEventText() {
+        return task.getName() + " will be complete?";
+    }
 
-        deferBtn.addActionListener(e -> onCancel());
-
-        // call onCancel() when cross is clicked
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-        addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent e) {
-                onCancel();
-            }
+    private void setListener() {
+        buttonEndTask.addActionListener(e -> {
+            view.deleteTask(task);
+            dispose();
         });
-
-        // call onCancel() on ESCAPE
-        contentPane.registerKeyboardAction(e -> onCancel(),
-                KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0),
-                JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+        deferBtn.addActionListener(e -> {
+            new AddView(view, task);
+            dispose();
+        });
     }
 
-    private void onOK() {
-        // add your code here
-        dispose();
-    }
 
-    private void onCancel() {
-        // add your code here if necessary
-        dispose();
-    }
 }
