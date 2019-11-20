@@ -6,8 +6,8 @@ import java.util.Vector;
 
 public interface ViewContract {
 
-    Task getAddTask();
     void addNewTask(Task task);
+    void deleteTask(int pos);
     void updateView(Vector<Task> tasks);
 
 }

@@ -17,7 +17,6 @@ public class MainView extends JFrame implements ViewContract {
     private JButton deleteTaskButton;
     private JScrollPane ScrollPane;
     private JTable table;
-
     private ModelContract model;
     private Vector<Task> tasks;
 
@@ -28,22 +27,18 @@ public class MainView extends JFrame implements ViewContract {
         setListener();
         tasks = model.getTasks();
         this.model = model;
-        Vector<Task> gg = new Vector<>();
-        gg.add(new Task("похавать","макарошки с пюрешкой","15:20","с Лехой"));
         tableNameCol();
-        updateView(gg);
+        updateView(tasks);
         setVisible(true);
     }
 
     private void setListener() {
         addTaskButton.addActionListener(e -> new AddView(this));
 
-        deleteTaskButton.addActionListener(e -> {
-
-        });
+        deleteTaskButton.addActionListener(e -> deleteTask(table.getSelectedRow()));
     }
 
-    private void inflateView(){
+    private void inflateView() {
         setBounds(400, 150, 800, 600);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -62,15 +57,14 @@ public class MainView extends JFrame implements ViewContract {
     @Override
     public void addNewTask(Task task) {
         tasks.add(task);
-        model.addTask(tasks);
         updateView(tasks);
     }
 
     @Override
-    public Task getAddTask() {
-        return null;
+    public void deleteTask(int pos) {
+        tasks.remove(pos);
+        updateView(tasks);
     }
-
 
     private static Vector<String> namCol = new Vector<>(4);
 
@@ -98,6 +92,11 @@ public class MainView extends JFrame implements ViewContract {
     static class TableModel extends DefaultTableModel {
         TableModel(Vector<Vector<String>> data, Vector namCol) {
             super(data, namCol);
+        }
+
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
         }
     }
 
