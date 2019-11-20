@@ -22,11 +22,11 @@ public class MainView extends JFrame implements ViewContract {
         inflateView();
         setListener();
         tasks = new Vector<>();
-        tasks.add(new Task("gfhgfh","fghfghfg","fghgfh","fghfgh"));
+        tasks.add(new Task("Work","my main mork","tomorrow","23-43-555"));
         updateView(tasks);
        // tasks = model.getTasks();
         this.model = model;
-        startEventView(new Task("fsg","dfgs","fsdg","sg"));
+        startEventView(new Task("Gym","enjoin","now","8-800-555-35-35"));
     }
 
     private void inflateView() {
@@ -58,6 +58,7 @@ public class MainView extends JFrame implements ViewContract {
     public void changeTask(Task taskOld, Task taskAct) {
         tasks.remove(taskOld);
         tasks.add(taskAct);
+        updateView(tasks);
     }
 
     @Override
