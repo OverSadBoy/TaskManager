@@ -29,7 +29,7 @@ public class MainView extends JFrame implements ViewContract {
         tasks = model.getTasks();
         this.model = model;
         Vector<Task> gg = new Vector<>();
-        gg.add(new Task("похавать","макарошки с пюрешкой","15:20","с Лехой"));
+        //gg.add(new Task("похавать","макарошки с пюрешкой","15:20","с Лехой"));
         tableNameCol();
         updateView(gg);
         setVisible(true);
@@ -87,7 +87,7 @@ public class MainView extends JFrame implements ViewContract {
             Vector<String> task = new Vector<>();
             task.add(value.getName());
             task.add(value.getDescription());
-            task.add(value.getNotificationDate());
+            task.add(value.getNotificationDate().toString());
             task.add(value.getContacts());
             data.add(task);
         }

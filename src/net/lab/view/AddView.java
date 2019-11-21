@@ -5,6 +5,7 @@ import net.lab.controller.ControllerContract;
 import net.lab.model.Task;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
 
 public class AddView extends JFrame {
     private JTextField nameTask;
@@ -38,10 +39,10 @@ public class AddView extends JFrame {
     }
 
     private Task getTask() {
-        return new Task(nameTask.getText(), description.getText(), date.getText(), contacts.getText());
+        return new Task(nameTask.getText(), description.getText(), new SimpleDateFormat(date.getText()), contacts.getText());
     }
 
-    private Task createNewTask(int id, String name, String description, String data, String contact) {
+    private Task createNewTask(int id, String name, String description, SimpleDateFormat data, String contact) {
         return new Task(name, description, data, contact);
     }
 
