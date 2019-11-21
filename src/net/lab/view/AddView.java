@@ -3,6 +3,8 @@ package net.lab.view;
 import net.lab.model.Task;
 
 import javax.swing.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AddView extends JFrame {
     private JTextField nameTask;
@@ -43,7 +45,7 @@ public class AddView extends JFrame {
         add(addPanel);
         nameTask.setText(task.getName());
         description.setText(task.getDescription());
-        date.setText(task.getNotificationDate());
+        date.setText(task.getNotificationDate().format(new Date()));
         contacts.setText(task.getContacts());
         addButton.setText("Edit");
         setVisible(true);
@@ -68,7 +70,7 @@ public class AddView extends JFrame {
     }
 
     private Task getNewTask() {
-        return new Task(nameTask.getText(), description.getText(), date.getText(), contacts.getText());
+        return new Task(nameTask.getText(), description.getText(), new SimpleDateFormat(date.getText()), contacts.getText());
     }
 
 }

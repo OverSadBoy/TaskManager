@@ -41,8 +41,15 @@ public class Controller implements Serializable, ControllerContract {
     }
 
     public void loadJournal() {
-       // view.updateView(model.getTasks());
+        // view.updateView(model.getTasks());
     }
 
+    private void checkDate() {
+        new Thread(() -> {
+            while (true) {
+
+            }
+        });
+    }
 
 }

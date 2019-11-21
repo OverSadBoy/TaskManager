@@ -6,6 +6,8 @@ import net.lab.model.Task;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class MainView extends JFrame implements ViewContract {
@@ -22,11 +24,11 @@ public class MainView extends JFrame implements ViewContract {
         inflateView();
         setListener();
         tasks = new Vector<>();
-        tasks.add(new Task("Work","my main mork","tomorrow","23-43-555"));
-        updateView(tasks);
-       // tasks = model.getTasks();
+        tasks.add(new Task("Work","my main mork",new SimpleDateFormat("13.05.2019"),"23-43-555"));
         this.model = model;
-        startEventView(new Task("Gym","enjoin","now","8-800-555-35-35"));
+        tasks = model.getTasks();
+        updateView(tasks);
+        startEventView(new Task("Gym","enjoin",new SimpleDateFormat("12.03.2020"),"8-800-555-35-35"));
     }
 
     private void inflateView() {
@@ -86,7 +88,7 @@ public class MainView extends JFrame implements ViewContract {
             Vector<String> task = new Vector<>();
             task.add(value.getName());
             task.add(value.getDescription());
-            task.add(value.getNotificationDate());
+            task.add(value.getNotificationDate().format(new Date()));
             task.add(value.getContacts());
             data.add(task);
         }
