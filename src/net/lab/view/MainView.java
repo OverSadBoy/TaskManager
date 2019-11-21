@@ -5,53 +5,42 @@ import net.lab.model.Task;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.Vector;
 
 public class MainView extends JFrame implements ViewContract {
 
-
     private JPanel jPanel1;
     private JButton addTaskButton;
     private JButton deleteTaskButton;
-    private JScrollPane ScrollPane;
     private JTable table;
-
     private ModelContract model;
     private Vector<Task> tasks;
-
 
     public MainView(ModelContract model) throws HeadlessException {
         super("Task Manager");
         inflateView();
         setListener();
-        tasks = model.getTasks();
+        tasks = new Vector<>();
+        tasks.add(new Task("Work","my main mork","tomorrow","23-43-555"));
+        updateView(tasks);
+       // tasks = model.getTasks();
         this.model = model;
-        Vector<Task> gg = new Vector<>();
-        //gg.add(new Task("похавать","макарошки с пюрешкой","15:20","с Лехой"));
+        startEventView(new Task("Gym","enjoin","now","8-800-555-35-35"));
+    }
+
+    private void inflateView() {
+        setBounds(400, 150, 800, 600);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        add(jPanel1);
         tableNameCol();
-        updateView(gg);
         setVisible(true);
     }
 
     private void setListener() {
         addTaskButton.addActionListener(e -> new AddView(this));
-
-        deleteTaskButton.addActionListener(e -> {
-
-        });
-    }
-
-    private void inflateView(){
-        setBounds(400, 150, 800, 600);
-        setResizable(false);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        add(jPanel1);
-    }
-
-    public Vector<Task> getTasks() {
-        return tasks;
+        deleteTaskButton.addActionListener(e -> deleteTask(tasks.get(table.getSelectedRow())));
     }
 
     @Override
@@ -62,15 +51,25 @@ public class MainView extends JFrame implements ViewContract {
     @Override
     public void addNewTask(Task task) {
         tasks.add(task);
-        model.addTask(tasks);
         updateView(tasks);
     }
 
     @Override
-    public Task getAddTask() {
-        return null;
+    public void changeTask(Task taskOld, Task taskAct) {
+        tasks.remove(taskOld);
+        tasks.add(taskAct);
+        updateView(tasks);
     }
 
+    @Override
+    public void deleteTask(Task task) {
+        tasks.remove(task);
+        updateView(tasks);
+    }
+
+    public void startEventView(Task task) {
+        new EventView(this, task);
+    }
 
     private static Vector<String> namCol = new Vector<>(4);
 
@@ -87,18 +86,21 @@ public class MainView extends JFrame implements ViewContract {
             Vector<String> task = new Vector<>();
             task.add(value.getName());
             task.add(value.getDescription());
-            task.add(value.getNotificationDate().toString());
+            task.add(value.getNotificationDate());
             task.add(value.getContacts());
             data.add(task);
         }
         return data;
     }
 
-
     static class TableModel extends DefaultTableModel {
         TableModel(Vector<Vector<String>> data, Vector namCol) {
             super(data, namCol);
         }
-    }
 
+        @Override
+        public boolean isCellEditable(int row, int column) {
+            return false;
+        }
+    }
 }
