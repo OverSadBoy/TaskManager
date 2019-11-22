@@ -16,6 +16,7 @@ public class Task implements Serializable {
         this.notificationDate = notificationDate;
         this.contacts = contacts;
     }
+
     public String getName() {
         return name;
     }
@@ -28,4 +29,6 @@ public class Task implements Serializable {
     public String getContacts() {
         return contacts;
     }
+
+
 }

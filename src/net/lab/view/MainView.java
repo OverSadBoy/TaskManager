@@ -23,8 +23,6 @@ public class MainView extends JFrame implements ViewContract {
         super("Task Manager");
         inflateView();
         setListener();
-        tasks = new Vector<>();
-        tasks.add(new Task("Work","my main mork",new SimpleDateFormat("13.05.2019"),"23-43-555"));
         this.model = model;
         tasks = model.getTasks();
         updateView(tasks);
@@ -53,6 +51,7 @@ public class MainView extends JFrame implements ViewContract {
     @Override
     public void addNewTask(Task task) {
         tasks.add(task);
+        model.addTask(tasks);
         updateView(tasks);
     }
 
@@ -60,12 +59,14 @@ public class MainView extends JFrame implements ViewContract {
     public void changeTask(Task taskOld, Task taskAct) {
         tasks.remove(taskOld);
         tasks.add(taskAct);
+        model.addTask(tasks);
         updateView(tasks);
     }
 
     @Override
     public void deleteTask(Task task) {
         tasks.remove(task);
+        model.addTask(tasks);
         updateView(tasks);
     }
 

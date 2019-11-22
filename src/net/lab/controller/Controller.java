@@ -17,7 +17,6 @@ public class Controller implements Serializable, ControllerContract {
 
     private ModelContract model;
     private ViewContract view;
-    private static final String fileName = "data.bin";
 
     public Controller(ModelContract model, ViewContract view) throws InterruptedException {
         this.model = model;
