@@ -3,7 +3,6 @@ package net.lab.view;
 import net.lab.model.Task;
 
 import javax.swing.*;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class AddView extends JFrame {
@@ -15,21 +14,16 @@ public class AddView extends JFrame {
     private JButton addButton;
     private JButton cancelButton;
 
-    private ViewContract view;
     private Task task;
 
-    AddView(ViewContract view) {
+    public AddView() {
         super("Add task");
         inflate();
-        setListenerAdd();
-        this.view = view;
     }
 
-    AddView(ViewContract view, Task task) {
+    public AddView(Task task) {
         super("Edit task");
         inflate(task);
-        setListenerEdit();
-        this.view = view;
     }
 
     private void inflate() {
@@ -51,26 +45,28 @@ public class AddView extends JFrame {
         setVisible(true);
     }
 
-    private void setListenerAdd() {
-        addButton.addActionListener(e -> {
-            view.addNewTask(getNewTask());
-            dispose();
-        });
-
-        cancelButton.addActionListener(e -> dispose());
+    public String getNameTask() {
+        return nameTask.getText();
     }
 
-    private void setListenerEdit() {
-        addButton.addActionListener(e -> {
-            view.changeTask(task, getNewTask());
-            dispose();
-        });
-
-        cancelButton.addActionListener(e -> dispose());
+    public String getDescription() {
+        return description.getText();
     }
 
-    private Task getNewTask() {
-        return new Task(nameTask.getText(), description.getText(), new SimpleDateFormat(date.getText()), contacts.getText());
+    public String getDate() {
+        return date.getText();
+    }
+
+    public String getContacts() {
+        return contacts.getText();
+    }
+
+    public JButton getAddButton() {
+        return addButton;
+    }
+
+    public JButton getCancelButton() {
+        return cancelButton;
     }
 
 }

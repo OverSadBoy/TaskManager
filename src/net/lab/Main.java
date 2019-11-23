@@ -4,13 +4,11 @@ import net.lab.controller.Controller;
 import net.lab.model.Model;
 import net.lab.view.MainView;
 
-import java.io.IOException;
-
 public class Main {
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) {
         Model model = new Model();
-        MainView view = new MainView(model);
-        Controller controller = new Controller(model,view);
+        MainView view = new MainView();
+        Controller controller = new Controller(model, view);
     }
 }

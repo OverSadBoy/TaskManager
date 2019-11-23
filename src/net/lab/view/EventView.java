@@ -11,15 +11,12 @@ public class EventView extends JFrame {
     private JButton deferBtn;
     private JLabel eventMes;
 
-    private ViewContract view;
     private Task task;
 
     EventView(ViewContract view, Task task) {
         super("Event");
-        this.view = view;
         this.task = task;
         inflate();
-        setListener();
     }
 
     private void inflate() {
@@ -34,16 +31,15 @@ public class EventView extends JFrame {
         return task.getName() + " will be complete?";
     }
 
-    private void setListener() {
-        buttonEndTask.addActionListener(e -> {
-            view.deleteTask(task);
-            dispose();
-        });
-        deferBtn.addActionListener(e -> {
-            new AddView(view, task);
-            dispose();
-        });
+    public JButton getButtonEndTask() {
+        return buttonEndTask;
     }
 
+    public JButton getDeferBtn() {
+        return deferBtn;
+    }
 
+    public JLabel getEventMes() {
+        return eventMes;
+    }
 }
