@@ -39,7 +39,7 @@ public class AddView extends JFrame {
         add(addPanel);
         nameTask.setText(task.getName());
         description.setText(task.getDescription());
-        date.setText(task.getNotificationDate().format(new Date()));
+        date.setText(Task.dateFormat.format(task.getNotificationDate()));
         contacts.setText(task.getContacts());
         addButton.setText("Edit");
         setVisible(true);

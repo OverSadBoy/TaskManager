@@ -5,7 +5,9 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 public class Model implements ModelContract {
@@ -19,7 +21,7 @@ public class Model implements ModelContract {
     }
 
     @Override
-    public void addTask(Vector<Task> tasks) {
+    public void updateModel(Vector<Task> tasks) {
         try {
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
             XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter(fileName));
@@ -38,7 +40,7 @@ public class Model implements ModelContract {
                 writer.writeEndElement();
                 //Notification Date
                 writer.writeStartElement("notificationDate");
-                writer.writeCharacters(task.getNotificationDate().toPattern());
+                writer.writeCharacters(Task.dateFormat.format(task.getNotificationDate()));
                 writer.writeEndElement();
                 //Contacts
                 writer.writeStartElement("contacts");
@@ -61,7 +63,7 @@ public class Model implements ModelContract {
         Vector<Task> tasks = new Vector<>();
         String name = "";
         String description = "";
-        SimpleDateFormat date = new SimpleDateFormat();
+        Date date = new Date();
         String contact = "";
         String type = "";
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
@@ -82,7 +84,7 @@ public class Model implements ModelContract {
                             description = reader.getText();
                             break;
                         case "notificationDate":
-                            date = new SimpleDateFormat(reader.getText());
+                            date = Task.dateFormat.parse(reader.getText());
                             break;
                         case "contacts":
                             contact = reader.getText();
@@ -90,7 +92,7 @@ public class Model implements ModelContract {
                     }
                 }
             }
-        } catch (XMLStreamException e) {
+        } catch (XMLStreamException | ParseException e) {
             e.printStackTrace();
         }
         return tasks;

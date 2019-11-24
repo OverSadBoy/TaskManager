@@ -13,7 +13,7 @@ public class EventView extends JFrame {
 
     private Task task;
 
-    EventView(ViewContract view, Task task) {
+    public EventView(ViewContract view, Task task) {
         super("Event");
         this.task = task;
         inflate();

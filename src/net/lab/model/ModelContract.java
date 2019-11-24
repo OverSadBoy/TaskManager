@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public interface ModelContract {
 
-    void addTask(Vector<Task> task);
+    void updateModel(Vector<Task> task);
 
     void editTask(Task beforeTask, Task afterTask);
 

@@ -7,6 +7,7 @@ import net.lab.view.EventView;
 import net.lab.view.MainView;
 
 import java.io.Serializable;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
@@ -27,6 +28,7 @@ public class Controller implements Serializable, ControllerContract {
         tableNameCol();
         initView();
         initMainController();
+        listenToSystemDate();
     }
 
     private void initView() {
@@ -43,14 +45,25 @@ public class Controller implements Serializable, ControllerContract {
 
     private void initAddController() {
         addView.getAddButton().addActionListener(actionEvent -> {
-            addTask(getNewTask());
+            try {
+                addTask(getNewTask());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
             addView.dispose();
         });
         addView.getCancelButton().addActionListener(actionEvent -> addView.dispose());
     }
 
     private void initChangeController(Task task) {
-        addView.getAddButton().addActionListener(actionEvent -> changeTask(task, getNewTask()));
+        addView.getAddButton().addActionListener(actionEvent -> {
+            try {
+                changeTask(task, getNewTask());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            addView.dispose();
+        });
         addView.getCancelButton().addActionListener(actionEvent -> addView.dispose());
     }
 
@@ -69,25 +82,25 @@ public class Controller implements Serializable, ControllerContract {
 
     public void addTask(Task task) {
         tasks.add(task);
-        model.addTask(tasks);
+        model.updateModel(tasks);
         initView();
     }
 
     public void deleteTask(Task task) {
         tasks.remove(task);
-        model.deleteTask(task);
+        model.updateModel(tasks);
         initView();
     }
 
     public void changeTask(Task taskOld, Task taskNew) {
         tasks.remove(taskOld);
         tasks.add(taskNew);
-        model.addTask(tasks);
+        model.updateModel(tasks);
         initView();
     }
 
-    private Task getNewTask() {
-        return new Task(addView.getNameTask(), addView.getDescription(), new SimpleDateFormat(addView.getDate()), addView.getContacts());
+    private Task getNewTask() throws ParseException {
+        return new Task(addView.getNameTask(), addView.getDescription(), Task.dateFormat.parse(addView.getDate()), addView.getContacts());
     }
 
     private static Vector<String> namCol = new Vector<>(4);
@@ -105,11 +118,25 @@ public class Controller implements Serializable, ControllerContract {
             Vector<String> task = new Vector<>();
             task.add(value.getName());
             task.add(value.getDescription());
-            task.add(value.getNotificationDate().format(new Date()));
+            task.add(Task.dateFormat.format(value.getNotificationDate()));
             task.add(value.getContacts());
             data.add(task);
         }
         return data;
+    }
+
+    private void listenToSystemDate() {
+        while (true) {
+            var taskList = ((Vector<Task>) tasks.clone());
+            for (var task :
+                    taskList) {
+                Date currentDate = new Date();
+                if (currentDate.equals(task.getNotificationDate())) {
+                    eventView = new EventView(mainView, task);
+                    initEventController(task);
+                }
+            }
+        }
     }
 
 }
