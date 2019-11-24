@@ -18,7 +18,7 @@ public class Controller implements Serializable, ControllerContract {
     private final MainView mainView;
     private AddView addView;
     private EventView eventView;
-
+    private boolean isCalled = false;
     private Vector<Task> tasks;
 
     public Controller(ModelContract model, MainView view) {
@@ -63,8 +63,12 @@ public class Controller implements Serializable, ControllerContract {
                 e.printStackTrace();
             }
             addView.dispose();
+            isCalled = false;
         });
-        addView.getCancelButton().addActionListener(actionEvent -> addView.dispose());
+        addView.getCancelButton().addActionListener(actionEvent -> {
+            addView.dispose();
+            isCalled = false;
+        });
     }
 
 
@@ -72,6 +76,7 @@ public class Controller implements Serializable, ControllerContract {
         eventView.getButtonEndTask().addActionListener(actionEvent -> {
             deleteTask(task);
             eventView.dispose();
+            isCalled = false;
         });
         eventView.getDeferBtn().addActionListener(actionEvent -> {
             addView = new AddView(task);
@@ -127,11 +132,12 @@ public class Controller implements Serializable, ControllerContract {
 
     private void listenToSystemDate() {
         while (true) {
-            var taskList = ((Vector<Task>) tasks.clone());
+            var taskList = (Vector<Task>) tasks.clone();
             for (var task :
                     taskList) {
                 Date currentDate = new Date();
-                if (currentDate.equals(task.getNotificationDate())) {
+                if (!isCalled && currentDate.after(task.getNotificationDate())) {
+                    isCalled = true;
                     eventView = new EventView(mainView, task);
                     initEventController(task);
                 }
