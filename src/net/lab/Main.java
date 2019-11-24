@@ -7,8 +7,6 @@ import net.lab.view.MainView;
 public class Main {
 
     public static void main(String[] args) {
-        Model model = new Model();
-        MainView view = new MainView();
-        Controller controller = new Controller(model, view);
+        new Controller(new Model(), new MainView());
     }
 }

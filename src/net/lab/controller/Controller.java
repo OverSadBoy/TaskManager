@@ -5,6 +5,7 @@ import net.lab.model.Task;
 import net.lab.view.AddView;
 import net.lab.view.EventView;
 import net.lab.view.MainView;
+import net.lab.view.Worming;
 
 import javax.swing.*;
 import java.io.Serializable;
@@ -49,13 +50,14 @@ public class Controller implements Serializable, ControllerContract {
 
     private void initAddController() {
         addView.getAddButton().addActionListener(actionEvent -> {
-            if(!addView.getDate().equals("")) {
+            if (!addView.getDate().equals("")) {
                 try {
                     addTask(getNewTask());
+                    addView.dispose();
                 } catch (ParseException e) {
-                    e.printStackTrace();
+                    new Worming();
+                    addView.getDate().setText("");
                 }
-                addView.dispose();
             }
         });
         addView.getCancelButton().addActionListener(actionEvent -> addView.dispose());
@@ -111,7 +113,7 @@ public class Controller implements Serializable, ControllerContract {
     }
 
     private Task getNewTask() throws ParseException {
-        return new Task(addView.getNameTask(), addView.getDescription(), Task.dateFormat.parse(addView.getDate()), addView.getContacts());
+        return new Task(addView.getNameTask(), addView.getDescription(), Task.dateFormat.parse(addView.getDate().getText()), addView.getContacts());
     }
 
     private static Vector<String> namCol = new Vector<>(4);

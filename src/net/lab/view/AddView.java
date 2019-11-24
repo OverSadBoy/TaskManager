@@ -52,8 +52,8 @@ public class AddView extends JFrame {
         return description.getText();
     }
 
-    public String getDate() {
-        return date.getText();
+    public JTextField getDate() {
+        return date;
     }
 
     public String getContacts() {
