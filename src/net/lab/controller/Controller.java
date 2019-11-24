@@ -8,7 +8,6 @@ import net.lab.view.MainView;
 
 import java.io.Serializable;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
@@ -133,12 +132,11 @@ public class Controller implements Serializable, ControllerContract {
     private void listenToSystemDate() {
         while (true) {
             var taskList = (Vector<Task>) tasks.clone();
-            for (var task :
-                    taskList) {
+            for (var task : taskList) {
                 Date currentDate = new Date();
                 if (!isCalled && currentDate.after(task.getNotificationDate())) {
                     isCalled = true;
-                    eventView = new EventView(mainView, task);
+                    eventView = new EventView(task);
                     initEventController(task);
                 }
             }

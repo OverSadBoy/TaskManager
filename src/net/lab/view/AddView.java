@@ -3,7 +3,6 @@ package net.lab.view;
 import net.lab.model.Task;
 
 import javax.swing.*;
-import java.util.Date;
 
 public class AddView extends JFrame {
     private JTextField nameTask;

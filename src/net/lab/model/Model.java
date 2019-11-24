@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Vector;
 
@@ -96,15 +95,5 @@ public class Model implements ModelContract {
             e.printStackTrace();
         }
         return tasks;
-    }
-
-    @Override
-    public void editTask(Task beforeTask, Task afterTask) {
-
-    }
-
-    @Override
-    public void deleteTask(Task task) {
-
     }
 }
