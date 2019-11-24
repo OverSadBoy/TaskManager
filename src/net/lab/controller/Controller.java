@@ -128,11 +128,10 @@ public class Controller implements Serializable, ControllerContract {
     private void listenToSystemDate() {
         while (true) {
             var taskList = ((Vector<Task>) tasks.clone());
-            for (var task :
-                    taskList) {
+            for (var task : taskList) {
                 Date currentDate = new Date();
                 if (currentDate.equals(task.getNotificationDate())) {
-                    eventView = new EventView(mainView, task);
+                    eventView = new EventView(task);
                     initEventController(task);
                 }
             }

@@ -98,13 +98,4 @@ public class Model implements ModelContract {
         return tasks;
     }
 
-    @Override
-    public void editTask(Task beforeTask, Task afterTask) {
-
-    }
-
-    @Override
-    public void deleteTask(Task task) {
-
-    }
 }
