@@ -15,14 +15,7 @@ public class Model implements ModelContract {
     private static FileOutputStream fileOutputStream;
     private static Vector<Task> taskList;
 
-    public Model() throws IOException {
-        var tasks = new Vector<Task>();
-        tasks.add(0, new Task("Rabota", "OnFriday", new SimpleDateFormat("27.10.2019"), "89297928290"));
-        tasks.add(0, new Task("Rabota2", "OnFriday", new SimpleDateFormat("28.10.2019"), "89297928290"));
-        tasks.add(0, new Task("Rabota3", "OnFriday", new SimpleDateFormat("29.10.2019"), "89297928290"));
-        tasks.add(0, new Task("Rabota4", "OnFriday", new SimpleDateFormat("30.10.2019"), "89297928290"));
-        tasks.add(0,new Task("Gym","enjoin",new SimpleDateFormat("12.03.2020"),"8-800-555-35-35"));
-        addTask(tasks);
+    public Model() {
     }
 
     @Override
@@ -79,7 +72,7 @@ public class Model implements ModelContract {
                 if (reader.isStartElement()) {
                     type = reader.getLocalName();
                 } else if (reader.isEndElement() && reader.getLocalName().equals("task")) {
-                    tasks.add(new Task(name,description,date,contact));
+                    tasks.add(new Task(name, description, date, contact));
                 } else if (reader.hasText() && reader.getText().trim().length() > 0) {
                     switch (type) {
                         case "name":
