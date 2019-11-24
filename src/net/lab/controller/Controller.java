@@ -6,6 +6,7 @@ import net.lab.view.AddView;
 import net.lab.view.EventView;
 import net.lab.view.MainView;
 
+import javax.swing.*;
 import java.io.Serializable;
 import java.text.ParseException;
 import java.util.Date;
@@ -39,17 +40,23 @@ public class Controller implements Serializable, ControllerContract {
             addView = new AddView();
             initAddController();
         });
-        mainView.getDeleteTaskButton().addActionListener(actionEvent -> deleteTask(tasks.get(mainView.getTable().getSelectedRow())));
+        mainView.getDeleteTaskButton().addActionListener(actionEvent -> {
+            if (mainView.getTable().getSelectedRow() >= 0)
+                deleteTask(tasks.get(mainView.getTable().getSelectedRow()));
+
+        });
     }
 
     private void initAddController() {
         addView.getAddButton().addActionListener(actionEvent -> {
-            try {
-                addTask(getNewTask());
-            } catch (ParseException e) {
-                e.printStackTrace();
+            if(!addView.getDate().equals("")) {
+                try {
+                    addTask(getNewTask());
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+                addView.dispose();
             }
-            addView.dispose();
         });
         addView.getCancelButton().addActionListener(actionEvent -> addView.dispose());
     }

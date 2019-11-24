@@ -74,6 +74,9 @@ public class Model implements ModelContract {
                     type = reader.getLocalName();
                 } else if (reader.isEndElement() && reader.getLocalName().equals("task")) {
                     tasks.add(new Task(name, description, date, contact));
+                    name = "";
+                    description = "";
+                    contact = "";
                 } else if (reader.hasText() && reader.getText().trim().length() > 0) {
                     switch (type) {
                         case "name":
