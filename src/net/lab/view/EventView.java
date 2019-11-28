@@ -7,7 +7,6 @@ import javax.swing.*;
 public class EventView extends JFrame {
     private JPanel contentPane;
     private JButton buttonEndTask;
-    private JPanel panelBtn;
     private JButton deferBtn;
     private JLabel eventMes;
 

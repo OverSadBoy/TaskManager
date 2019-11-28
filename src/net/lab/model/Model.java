@@ -1,10 +1,7 @@
 package net.lab.model;
 
 import javax.xml.stream.*;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Vector;
@@ -12,9 +9,6 @@ import java.util.Vector;
 public class Model implements ModelContract {
 
     private static final String fileName = "Data.xml";
-    private static FileInputStream fileInputStream;
-    private static FileOutputStream fileOutputStream;
-    private static Vector<Task> taskList;
 
     public Model() {
     }
@@ -67,7 +61,7 @@ public class Model implements ModelContract {
         String type = "";
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         try {
-            XMLStreamReader reader = inputFactory.createXMLStreamReader(fileName, fileInputStream);
+            XMLStreamReader reader = inputFactory.createXMLStreamReader(fileName, new FileInputStream(fileName));
             while (reader.hasNext()) {
                 reader.next();
                 if (reader.isStartElement()) {
@@ -94,7 +88,7 @@ public class Model implements ModelContract {
                     }
                 }
             }
-        } catch (XMLStreamException | ParseException e) {
+        } catch (XMLStreamException | ParseException | FileNotFoundException e) {
             e.printStackTrace();
         }
         return tasks;

@@ -1,19 +1,12 @@
 package net.lab.controller;
 
-import net.lab.model.ModelContract;
-import net.lab.model.Task;
-import net.lab.view.AddView;
-import net.lab.view.EventView;
-import net.lab.view.MainView;
-import net.lab.view.Worming;
-
-import javax.swing.*;
-import java.io.Serializable;
+import net.lab.model.*;
+import net.lab.view.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Vector;
 
-public class Controller implements Serializable, ControllerContract {
+public class Controller implements ControllerContract {
 
     private final ModelContract model;
     private final MainView mainView;

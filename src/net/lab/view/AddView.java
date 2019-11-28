@@ -13,8 +13,6 @@ public class AddView extends JFrame {
     private JButton addButton;
     private JButton cancelButton;
 
-    private Task task;
-
     public AddView() {
         super("Add task");
         inflate();

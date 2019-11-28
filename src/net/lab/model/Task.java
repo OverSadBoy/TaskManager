@@ -1,10 +1,9 @@
 package net.lab.model;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Task implements Serializable {
+public class Task {
     private final String name;
     private final String description;
     private final Date notificationDate;
