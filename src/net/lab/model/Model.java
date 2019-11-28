@@ -6,9 +6,9 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Vector;
 
-public class Model implements ModelContract {
+import static net.lab.utils.ModelUtils.*;
 
-    private static final String fileName = "Data.xml";
+public class Model implements ModelContract {
 
     public Model() {
     }
@@ -17,26 +17,25 @@ public class Model implements ModelContract {
     public void updateModel(Vector<Task> tasks) {
         try {
             XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
-            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter(fileName));
-            writer.writeStartDocument("1.0");
-            writer.writeStartElement("tasks");
-            for (var task :
-                    tasks) {
-                writer.writeStartElement("task");
+            XMLStreamWriter writer = outputFactory.createXMLStreamWriter(new FileWriter(FILE_NAME));
+            writer.writeStartDocument(VERSION);
+            writer.writeStartElement(TASKS);
+            for (var task : tasks) {
+                writer.writeStartElement(TASK);
                 //Name
-                writer.writeStartElement("name");
+                writer.writeStartElement(NAME);
                 writer.writeCharacters(task.getName());
                 writer.writeEndElement();
                 //Description
-                writer.writeStartElement("description");
+                writer.writeStartElement(DESCRIPTION);
                 writer.writeCharacters(task.getDescription());
                 writer.writeEndElement();
                 //Notification Date
-                writer.writeStartElement("notificationDate");
+                writer.writeStartElement(NOTIFICATION_DATE);
                 writer.writeCharacters(Task.dateFormat.format(task.getNotificationDate()));
                 writer.writeEndElement();
                 //Contacts
-                writer.writeStartElement("contacts");
+                writer.writeStartElement(CONTACTS);
                 writer.writeCharacters(task.getContacts());
                 writer.writeEndElement();
 
@@ -61,28 +60,28 @@ public class Model implements ModelContract {
         String type = "";
         XMLInputFactory inputFactory = XMLInputFactory.newInstance();
         try {
-            XMLStreamReader reader = inputFactory.createXMLStreamReader(fileName, new FileInputStream(fileName));
+            XMLStreamReader reader = inputFactory.createXMLStreamReader(FILE_NAME, new FileInputStream(FILE_NAME));
             while (reader.hasNext()) {
                 reader.next();
                 if (reader.isStartElement()) {
                     type = reader.getLocalName();
-                } else if (reader.isEndElement() && reader.getLocalName().equals("task")) {
+                } else if (reader.isEndElement() && reader.getLocalName().equals(TASK)) {
                     tasks.add(new Task(name, description, date, contact));
                     name = "";
                     description = "";
                     contact = "";
                 } else if (reader.hasText() && reader.getText().trim().length() > 0) {
                     switch (type) {
-                        case "name":
+                        case NAME:
                             name = reader.getText();
                             break;
-                        case "description":
+                        case DESCRIPTION:
                             description = reader.getText();
                             break;
-                        case "notificationDate":
+                        case NOTIFICATION_DATE:
                             date = Task.dateFormat.parse(reader.getText());
                             break;
-                        case "contacts":
+                        case CONTACTS:
                             contact = reader.getText();
                             break;
                     }

@@ -1,8 +1,9 @@
 package net.lab.view;
 
 import net.lab.model.Task;
-
 import javax.swing.*;
+
+import static net.lab.utils.ViewUtils.*;
 
 public class AddView extends JFrame {
     private JTextField nameTask;
@@ -14,12 +15,12 @@ public class AddView extends JFrame {
     private JButton cancelButton;
 
     public AddView() {
-        super("Add task");
+        super(ADD_TASK);
         inflate();
     }
 
     public AddView(Task task) {
-        super("Edit task");
+        super(EDIT_TASK);
         inflate(task);
     }
 
@@ -31,14 +32,15 @@ public class AddView extends JFrame {
     }
 
     private void inflate(Task task) {
-        setBounds(500, 350, 500, 350);
+        setSize( 500, 350);
+        setLocationRelativeTo(null);
         setResizable(false);
         add(addPanel);
         nameTask.setText(task.getName());
         description.setText(task.getDescription());
         date.setText(Task.dateFormat.format(task.getNotificationDate()));
         contacts.setText(task.getContacts());
-        addButton.setText("Edit");
+        addButton.setText(EDIT);
         setVisible(true);
     }
 

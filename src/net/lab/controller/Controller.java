@@ -6,6 +6,8 @@ import java.text.ParseException;
 import java.util.Date;
 import java.util.Vector;
 
+import static net.lab.utils.ControllerUtils.*;
+
 public class Controller implements ControllerContract {
 
     private final ModelContract model;
@@ -48,7 +50,7 @@ public class Controller implements ControllerContract {
                     addTask(getNewTask());
                     addView.dispose();
                 } catch (ParseException e) {
-                    new Worming();
+                    new ErrorView();
                     addView.getDate().setText("");
                 }
             }
@@ -112,10 +114,10 @@ public class Controller implements ControllerContract {
     private static Vector<String> namCol = new Vector<>(4);
 
     private void tableNameCol() {
-        namCol.add("Name");
-        namCol.add("Description");
-        namCol.add("Notification date");
-        namCol.add("Contacts");
+        namCol.add(NAME);
+        namCol.add(DESCRIPTION);
+        namCol.add(NOTIFICATION_DATE);
+        namCol.add(CONTACTS);
     }
 
     private Vector<Vector<String>> toNormalVector(Vector<Task> tasks) {

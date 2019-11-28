@@ -5,6 +5,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.Vector;
 
+import static net.lab.utils.ViewUtils.TASK_MANAGER;
+
 public class MainView extends JFrame implements ViewContract {
 
     private JPanel jPanel1;
@@ -13,17 +15,19 @@ public class MainView extends JFrame implements ViewContract {
     private JTable table;
 
     public MainView() throws HeadlessException {
-        super("Task Manager");
+        super(TASK_MANAGER);
         inflateView();
     }
 
     private void inflateView() {
-        setBounds(400, 150, 800, 600);
+        setSize( 800, 600);
+        setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         add(jPanel1);
         setVisible(true);
     }
+
 
     public void updateView(Vector<Vector<String>> vectorTable, Vector<String> namCol) {
         table.setModel(new TableModel(vectorTable, namCol));

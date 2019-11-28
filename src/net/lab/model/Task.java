@@ -1,5 +1,7 @@
 package net.lab.model;
 
+import net.lab.utils.ModelUtils;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -8,7 +10,7 @@ public class Task {
     private final String description;
     private final Date notificationDate;
     private final String contacts;
-    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm dd.MM.yy");
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat(ModelUtils.DATE_FORMAT);
 
     public Task(String name, String description, Date notificationDate, String contacts) {
         this.name = name;
@@ -32,6 +34,4 @@ public class Task {
     public String getContacts() {
         return contacts;
     }
-
-
 }

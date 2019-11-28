@@ -2,16 +2,19 @@ package net.lab.view;
 
 import javax.swing.*;
 
-public class Worming extends JDialog {
+import static net.lab.utils.ViewUtils.INVALID_DATE_FORMAT;
+
+public class ErrorView extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JLabel mesText;
 
-    public Worming() {
+    public ErrorView() {
         pack();
         setContentPane(contentPane);
-        setBounds(300, 300, 300, 150);
-        mesText.setText("invalid date format");
+        setSize( 300, 150);
+        setLocationRelativeTo(null);
+        mesText.setText(INVALID_DATE_FORMAT);
         setVisible(true);
         buttonOK.addActionListener(e -> dispose());
     }
