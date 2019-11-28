@@ -45,8 +45,7 @@ public class Model implements ModelContract {
             writer.writeEndDocument();
             //writer.flush();
             writer.close();
-        } catch (XMLStreamException | IOException e) {
-            e.printStackTrace();
+        } catch (XMLStreamException | IOException ignored) {
         }
     }
 
@@ -87,8 +86,7 @@ public class Model implements ModelContract {
                     }
                 }
             }
-        } catch (XMLStreamException | ParseException | FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (XMLStreamException | ParseException | FileNotFoundException ignored) {
         }
         return tasks;
     }

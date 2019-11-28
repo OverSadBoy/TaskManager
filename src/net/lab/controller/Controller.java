@@ -2,6 +2,8 @@ package net.lab.controller;
 
 import net.lab.model.*;
 import net.lab.view.*;
+
+import javax.swing.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Vector;
@@ -39,7 +41,6 @@ public class Controller implements ControllerContract {
         mainView.getDeleteTaskButton().addActionListener(actionEvent -> {
             if (mainView.getTable().getSelectedRow() >= 0)
                 deleteTask(tasks.get(mainView.getTable().getSelectedRow()));
-
         });
     }
 
@@ -50,7 +51,7 @@ public class Controller implements ControllerContract {
                     addTask(getNewTask());
                     addView.dispose();
                 } catch (ParseException e) {
-                    new ErrorView();
+                    new ErrorView(INVALID_DATE_FORMAT);
                     addView.getDate().setText("");
                 }
             }
@@ -63,7 +64,7 @@ public class Controller implements ControllerContract {
             try {
                 changeTask(task, getNewTask());
             } catch (ParseException e) {
-                e.printStackTrace();
+                new ErrorView(ERROR);
             }
             addView.dispose();
             isCalled = false;

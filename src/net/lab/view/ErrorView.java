@@ -1,22 +1,21 @@
 package net.lab.view;
 
-import javax.swing.*;
+import net.lab.utils.ViewUtils;
 
-import static net.lab.utils.ViewUtils.INVALID_DATE_FORMAT;
+import javax.swing.*;
 
 public class ErrorView extends JDialog {
     private JPanel contentPane;
     private JButton buttonOK;
     private JLabel mesText;
 
-    public ErrorView() {
-        pack();
+    public ErrorView(String message) {
+        setTitle(ViewUtils.ERROR);
         setContentPane(contentPane);
-        setSize( 300, 150);
+        setSize(300, 150);
         setLocationRelativeTo(null);
-        mesText.setText(INVALID_DATE_FORMAT);
+        mesText.setText(message);
         setVisible(true);
         buttonOK.addActionListener(e -> dispose());
     }
-
 }

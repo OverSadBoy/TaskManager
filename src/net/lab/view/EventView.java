@@ -4,15 +4,17 @@ import net.lab.model.Task;
 
 import javax.swing.*;
 
-import static net.lab.utils.ViewUtils.*;
+import static net.lab.utils.ViewUtils.EVENT;
 
 public class EventView extends JFrame {
     private JPanel contentPane;
     private JButton buttonEndTask;
+    private JPanel panelBtn;
     private JButton deferBtn;
     private JLabel eventMes;
 
     private Task task;
+
 
     public EventView(Task task) {
         super(EVENT);
@@ -30,7 +32,7 @@ public class EventView extends JFrame {
     }
 
     private String setEventText() {
-        return task.getName() + WILL_BE_COMPLETE;
+        return task.getName() + " will be complete?";
     }
 
     public JButton getButtonEndTask() {
