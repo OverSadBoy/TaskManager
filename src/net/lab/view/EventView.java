@@ -5,6 +5,7 @@ import net.lab.model.Task;
 import javax.swing.*;
 
 import static net.lab.utils.ViewUtils.EVENT;
+import static net.lab.utils.ViewUtils.WILL_BE_COMPLETE;
 
 public class EventView extends JFrame {
     private JPanel contentPane;
@@ -32,7 +33,7 @@ public class EventView extends JFrame {
     }
 
     private String setEventText() {
-        return task.getName() + " will be complete?";
+        return task.getName() + WILL_BE_COMPLETE;
     }
 
     public JButton getButtonEndTask() {

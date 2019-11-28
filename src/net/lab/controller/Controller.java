@@ -4,6 +4,7 @@ import net.lab.model.*;
 import net.lab.view.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.Vector;
@@ -46,13 +47,14 @@ public class Controller implements ControllerContract {
 
     private void initAddController() {
         addView.getAddButton().addActionListener(actionEvent -> {
-            if (!addView.getDate().equals("")) {
+            if (!addView.getDate().getText().equals("") && !addView.getNameTask().equals("")) {
                 try {
                     addTask(getNewTask());
                     addView.dispose();
                 } catch (ParseException e) {
                     new ErrorView(INVALID_DATE_FORMAT);
                     addView.getDate().setText("");
+                    addView.getDateLable().setForeground(Color.RED);
                 }
             }
         });

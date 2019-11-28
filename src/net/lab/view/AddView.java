@@ -1,6 +1,7 @@
 package net.lab.view;
 
 import net.lab.model.Task;
+
 import javax.swing.*;
 
 import static net.lab.utils.ViewUtils.*;
@@ -13,6 +14,8 @@ public class AddView extends JFrame {
     private JPanel addPanel;
     private JButton addButton;
     private JButton cancelButton;
+    private JLabel dateLable;
+    private JLabel nameTaskLable;
 
     public AddView() {
         super(ADD_TASK);
@@ -25,14 +28,15 @@ public class AddView extends JFrame {
     }
 
     private void inflate() {
-        setBounds(500, 350, 500, 350);
+        setSize(500, 350);
+        setLocationRelativeTo(null);
         setResizable(false);
         add(addPanel);
         setVisible(true);
     }
 
     private void inflate(Task task) {
-        setSize( 500, 350);
+        setSize(500, 350);
         setLocationRelativeTo(null);
         setResizable(false);
         add(addPanel);
@@ -68,4 +72,11 @@ public class AddView extends JFrame {
         return cancelButton;
     }
 
+    public JLabel getDateLable() {
+        return dateLable;
+    }
+
+    public JLabel getNameTaskLable() {
+        return nameTaskLable;
+    }
 }

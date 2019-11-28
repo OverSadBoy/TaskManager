@@ -74,20 +74,20 @@
           <text value="Description"/>
         </properties>
       </component>
-      <component id="e3ef4" class="javax.swing.JLabel">
+      <component id="e3ef4" class="javax.swing.JLabel" binding="nameTaskLable">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Name Task"/>
+          <text value="Name Task *"/>
         </properties>
       </component>
-      <component id="41247" class="javax.swing.JLabel">
+      <component id="41247" class="javax.swing.JLabel" binding="dateLable">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Notification Date hh:mm dd.mm.yy"/>
+          <text value="Notification Date hh:mm dd.mm.yy *"/>
         </properties>
       </component>
       <component id="38dc5" class="javax.swing.JLabel">
