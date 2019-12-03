@@ -14,7 +14,7 @@ public class EventView extends JFrame {
     private JLabel eventMes;
     private JLabel description;
 
-    private Task task;
+    private final Task task;
 
 
     public EventView(Task task) {
@@ -24,12 +24,16 @@ public class EventView extends JFrame {
     }
 
     private void inflate() {
-        setSize(600, 200);
+        setSize(400, 150);
         setLocationRelativeTo(null);
         setResizable(false);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         add(contentPane);
         eventMes.setText(setEventName());
-        description.setText(setEventDescription());
+        if (!task.getDescription().equals(""))
+            description.setText(setEventDescription());
+        else
+            description.setText(DESCRIPTION_NOT_FOUND);
         setVisible(true);
     }
 

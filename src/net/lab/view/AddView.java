@@ -28,15 +28,16 @@ public class AddView extends JFrame {
     }
 
     private void inflate() {
-        setSize(500, 350);
+        setSize(500, 300);
         setLocationRelativeTo(null);
         setResizable(false);
         add(addPanel);
         setVisible(true);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     private void inflate(Task task) {
-        setSize(500, 350);
+        setSize(500, 300);
         setLocationRelativeTo(null);
         setResizable(false);
         add(addPanel);
@@ -46,6 +47,7 @@ public class AddView extends JFrame {
         contacts.setText(task.getContacts());
         addButton.setText(EDIT);
         setVisible(true);
+        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
     }
 
     public String getNameTask() {

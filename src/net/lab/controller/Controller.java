@@ -1,9 +1,9 @@
 package net.lab.controller;
 
-import net.lab.model.*;
+import net.lab.model.ModelContract;
+import net.lab.model.Task;
 import net.lab.view.*;
 
-import javax.swing.*;
 import java.awt.*;
 import java.text.ParseException;
 import java.util.Date;
@@ -17,8 +17,9 @@ public class Controller implements ControllerContract {
     private final MainView mainView;
     private AddView addView;
     private EventView eventView;
+    private ConfirmView confirmView;
     private boolean isCalled = false;
-    private Vector<Task> tasks;
+    private final Vector<Task> tasks;
 
     public Controller(ModelContract model, MainView view) {
         this.model = model;
@@ -40,9 +41,19 @@ public class Controller implements ControllerContract {
             initAddController();
         });
         mainView.getDeleteTaskButton().addActionListener(actionEvent -> {
-            if (mainView.getTable().getSelectedRow() >= 0)
-                deleteTask(tasks.get(mainView.getTable().getSelectedRow()));
+            if (mainView.getTable().getSelectedRow() >= 0) {
+                confirmView = new ConfirmView();
+                initConfirmController();
+            }
         });
+    }
+
+    private void initConfirmController() {
+        confirmView.getButtonOK().addActionListener(e -> {
+            deleteTask(tasks.get(mainView.getTable().getSelectedRow()));
+            confirmView.dispose();
+        });
+        confirmView.getButtonCancel().addActionListener(e -> confirmView.dispose());
     }
 
     private void initAddController() {
@@ -114,7 +125,7 @@ public class Controller implements ControllerContract {
         return new Task(addView.getNameTask(), addView.getDescription(), Task.dateFormat.parse(addView.getDate().getText()), addView.getContacts());
     }
 
-    private static Vector<String> namCol = new Vector<>(4);
+    private static final Vector<String> namCol = new Vector<>(4);
 
     private void tableNameCol() {
         namCol.add(NAME);
