@@ -28,7 +28,7 @@ public class Task {
     }
 
     public Date getNotificationDate() {
-        return notificationDate;
+        return (Date) notificationDate.clone();
     }
 
     public String getContacts() {

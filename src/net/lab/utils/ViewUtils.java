@@ -6,6 +6,7 @@ public class ViewUtils {
     public static final String EDIT = "Edit";
     public static final String ERROR = "Error";
     public static final String EVENT = "Event";
-    public static final String WILL_BE_COMPLETE = " will be complete?";
+    public static final String SCHEDULED_TASK = "Scheduled task: ";
+    public static final String DESCRIPTION = "Description: ";
     public static final String TASK_MANAGER = "Task Manager";
 }

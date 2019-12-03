@@ -88,6 +88,6 @@ public class Model implements ModelContract {
             }
         } catch (XMLStreamException | ParseException | FileNotFoundException ignored) {
         }
-        return tasks;
+        return (Vector<Task>) tasks.clone();
     }
 }

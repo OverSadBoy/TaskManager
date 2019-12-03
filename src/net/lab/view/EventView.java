@@ -4,8 +4,7 @@ import net.lab.model.Task;
 
 import javax.swing.*;
 
-import static net.lab.utils.ViewUtils.EVENT;
-import static net.lab.utils.ViewUtils.WILL_BE_COMPLETE;
+import static net.lab.utils.ViewUtils.*;
 
 public class EventView extends JFrame {
     private JPanel contentPane;
@@ -13,6 +12,7 @@ public class EventView extends JFrame {
     private JPanel panelBtn;
     private JButton deferBtn;
     private JLabel eventMes;
+    private JLabel description;
 
     private Task task;
 
@@ -24,17 +24,23 @@ public class EventView extends JFrame {
     }
 
     private void inflate() {
-        setSize( 350, 200);
+        setSize(600, 200);
         setLocationRelativeTo(null);
         setResizable(false);
         add(contentPane);
-        eventMes.setText(setEventText());
+        eventMes.setText(setEventName());
+        description.setText(setEventDescription());
         setVisible(true);
     }
 
-    private String setEventText() {
-        return task.getName() + WILL_BE_COMPLETE;
+    private String setEventName() {
+        return SCHEDULED_TASK + task.getName();
     }
+
+    private String setEventDescription() {
+        return DESCRIPTION + task.getDescription();
+    }
+
 
     public JButton getButtonEndTask() {
         return buttonEndTask;
